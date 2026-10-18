@@ -4,10 +4,6 @@ const PROMO_MIN_SUBTOTAL = 20000;
 const DELIVERY_PRICE = 30000;
 const FREE_DELIVERY_SUBTOTAL = 50000;
 
-function notImplemented() {
-  throw new Error('Корзина ещё не реализована. Сначала прочитайте тесты.');
-}
-
 function assertQuantity(quantity, stock) {
   if (!Number.isInteger(quantity) || quantity <= 0) {
     throw new RangeError('Количество товара должно быть положительным целым числом.');
