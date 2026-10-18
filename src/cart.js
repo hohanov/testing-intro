@@ -45,7 +45,14 @@ function calculateCartSubtotal(cart) {
   return cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 }
 
-function calculateOrderTotal() { return notImplemented(); }
+function calculateOrderTotal(cart, promoCode = '') {
+  const subtotal = calculateCartSubtotal(cart);
+  const hasDiscount = promoCode === PROMO_CODE && subtotal >= PROMO_MIN_SUBTOTAL;
+  const discount = hasDiscount ? Math.round(subtotal * PROMO_RATE) : 0;
+  const delivery = subtotal > 0 && subtotal < FREE_DELIVERY_SUBTOTAL ? DELIVERY_PRICE : 0;
+
+  return { subtotal, discount, delivery, total: subtotal - discount + delivery };
+}
 
 const cartApi = { addToCart, changeQuantity, removeFromCart, calculateCartSubtotal, calculateOrderTotal };
 
